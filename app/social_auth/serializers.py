@@ -36,6 +36,9 @@ class GoogleSocialAuthSerializer(serializers.Serializer):
         if user_data['aud'] != settings.SOCIAL_AUTH_GOOGLE_OAUTH2_CLIENT_ID:
             raise AuthenticationFailed('oops, who are you?')
 
+        if not user_data['email_verified']:
+            raise AuthenticationFailed('verify your email first')
+
         email = user_data['email']
         provider = UserAccount.GOOGLE_AUTH
 

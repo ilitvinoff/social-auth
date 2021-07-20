@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv("MYSQL_DATABASE", 'social_db'),
         'USER': os.getenv("MYSQL_USER", 'root'),
-        'PASSWORD': os.getenv("MYSQL_USER", 'PASSWORD'),
+        'PASSWORD': os.getenv("MYSQL_USER", 'root'),
         'HOST': os.getenv("MYSQL_HOST", 'localhost'),
         'PORT': os.getenv("MYSQL_PORT", '3306'),
         'OPTIONS': {

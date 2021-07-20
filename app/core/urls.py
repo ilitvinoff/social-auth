@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from django.views.generic import TemplateView
 from drf_yasg import openapi, views
 from rest_framework import permissions
 
@@ -29,6 +30,7 @@ schema_view = views.get_schema_view(
 )
 
 urlpatterns = [
+    path('g/',TemplateView.as_view(template_name='google.html'),name='google-auth-client-page'),
     path('admin/', admin.site.urls),
     path('api/v1/', include([
         path('account/', include('accounts.urls')),

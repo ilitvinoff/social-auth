@@ -5,3 +5,5 @@ app/core/__pycache__/
 app/accounts/migrations/__pycache__/
 app/accounts/__pycache__/
 __pycache__/
+auth-venv/
+social_front/
