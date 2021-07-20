@@ -1,0 +1,7 @@
+rest_auth_demo_venv/
+.idea/
+app/social_auth/__pycache__/
+app/core/__pycache__/
+app/accounts/migrations/__pycache__/
+app/accounts/__pycache__/
+__pycache__/
