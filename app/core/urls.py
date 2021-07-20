@@ -30,9 +30,9 @@ schema_view = views.get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/account/',
-         include('accounts.urls'),
-         include('social_auth.urls')
+    path('api/v1/', include([
+        path('account/', include('accounts.urls')),
+        path('social-auth/', include('social_auth.urls'))])
          ),
 
     re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
