@@ -19,7 +19,7 @@ class FacebookSocialAuthSerializer(serializers.Serializer):
         except:
             raise serializers.ValidationError('The token is invalid or expired. Please login again.')
 
-        provider = UserAccount.FACEBOOK_AUTH
+        provider = settings.FACEBOOK_AUTH_PROVIDER
         return register_social_user(provider=provider, email=email)
 
 
@@ -40,6 +40,6 @@ class GoogleSocialAuthSerializer(serializers.Serializer):
             raise AuthenticationFailed('verify your email first')
 
         email = user_data['email']
-        provider = UserAccount.GOOGLE_AUTH
+        provider = settings.GOOGLE_AUTH_PROVIDER
 
         return register_social_user(provider=provider, email=email)

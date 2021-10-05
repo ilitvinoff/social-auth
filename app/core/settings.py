@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-tmf_$_thn)0pdvje3*o8*a^btf&p2t)n%y3ij6w!!p!6(ehtx4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv("MYSQL_DATABASE", 'social_db'),
         'USER': os.getenv("MYSQL_USER", 'root'),
-        'PASSWORD': os.getenv("MYSQL_USER", 'root'),
+        'PASSWORD': os.getenv("MYSQL_USER", 'PASSWORD'),
         'HOST': os.getenv("MYSQL_HOST", 'localhost'),
         'PORT': os.getenv("MYSQL_PORT", '3306'),
         'OPTIONS': {
@@ -140,15 +140,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "accounts.UserAccount"
 
 # social aut config
-SOCIAL_AUTH_AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google.GoogleOAuth2',
-)
+EMAIL_AUTH_PROVIDER = "email"
+GOOGLE_AUTH_PROVIDER = "google"
+FACEBOOK_AUTH_PROVIDER = "facebook"
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('GOOGLE_OAUTH2_KEY', '')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('GOOGLE_OAUTH2_SECRET', 'iKJoGcWOhNobMKRGh3zhWm5P')
 SOCIAL_AUTH_GOOGLE_OAUTH2_CLIENT_ID = os.getenv('GOOGLE_OAUTH2_CLIENT_ID',
                                                 '627714308007-sqjlt3v5b4r11q7hju78mo0ouu4ij8to.apps.googleusercontent.com')
 
+PROVIDER_SECRET_KEY_MAP = {
+    GOOGLE_AUTH_PROVIDER: SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET,
+}
 # rest basic settings
 PAGE_SIZE = 50
 
@@ -160,8 +163,8 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
     ),
 }
 
@@ -185,4 +188,3 @@ SWAGGER_SETTINGS = {
         },
     }
 }
-

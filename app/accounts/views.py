@@ -1,4 +1,3 @@
-from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics, status, permissions
 from rest_framework.decorators import parser_classes
 from rest_framework.parsers import FormParser, MultiPartParser
@@ -8,22 +7,20 @@ from rest_framework_simplejwt.views import TokenViewBase
 
 from .models import UserAccount
 from .serializers import (
-    UserAccountSerializer, CreateUserAccountSerializer
+    UserSerializer, CreateUserAccountSerializer
 )
 
 
 class UserList(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
     queryset = UserAccount.objects.all()
-    serializer_class = UserAccountSerializer
+    serializer_class = UserSerializer
 
 
 class CreateUser(generics.CreateAPIView):
     queryset = UserAccount.objects.all()
     serializer_class = CreateUserAccountSerializer
 
-    @swagger_auto_schema(tags=['Register'], request_body=CreateUserAccountSerializer,
-                         responses={200: 'UserWalletSerializer'})
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -43,14 +40,14 @@ class CreateUser(generics.CreateAPIView):
 class UserDetails(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated]
     queryset = UserAccount.objects.all()
-    serializer_class = UserAccountSerializer
+    serializer_class = UserSerializer
 
 
 @parser_classes((FormParser, MultiPartParser))
 class UserCurrent(generics.RetrieveUpdateAPIView):
     permission_classes = [permissions.IsAuthenticated]
     queryset = UserAccount.objects.all()
-    serializer_class = UserAccountSerializer
+    serializer_class = UserSerializer
 
     def get_object(self):
         queryset = self.filter_queryset(self.get_queryset())
@@ -65,7 +62,7 @@ class UserLogout(generics.RetrieveAPIView):
     An Api View which provides a method to logout from current account
     """
     permission_classes = [permissions.IsAuthenticated]
-    serializer_class = UserAccountSerializer
+    serializer_class = UserSerializer
 
     def get(self, request, *args, **kwargs):
         return Response(status=status.HTTP_200_OK)

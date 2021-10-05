@@ -5,7 +5,7 @@ from rest_framework.validators import UniqueValidator
 from .models import UserAccount
 
 
-class UserAccountSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     email = serializers.CharField(required=True, allow_null=False, allow_blank=False, validators=[
         UniqueValidator(queryset=UserAccount.objects.all(), message="Email field must be unique.")])
 
